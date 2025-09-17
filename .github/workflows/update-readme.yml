@@ -1,0 +1,36 @@
+name: Update FCC Projects Table
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'   # Runs weekly on Sunday
+  workflow_dispatch:      # Allow manual runs
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install node-fetch@2
+
+      - name: Update README
+        run: node .github/scripts/update-readme.js
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "chore: update FCC projects table [skip ci]" || echo "No changes to commit"
+          git push
