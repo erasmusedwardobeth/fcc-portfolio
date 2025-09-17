@@ -45,11 +45,7 @@ This portfolio will grow as I progress into JavaScript, Frontend Libraries, and 
 - [x] Responsive Web Design ![Badge](https://img.shields.io/badge/Certified-Responsive%20Web%20Design-brightgreen)  
 - [ ] JavaScript Algorithms and Data Structures  
 - [ ] Front End Development Libraries  
-- [ ] Data Visualization  
 - [ ] Back End Development and APIs  
-- [ ] Quality Assurance  
-- [ ] Scientific Computing with Python  
-- [ ] Machine Learning with Python  
 
 ---
 
