@@ -1,0 +1,29 @@
+const username = "erasmusedwardobeth";
+const projectsDiv = document.getElementById("projects");
+
+async function loadProjects() {
+  const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=created`);
+  const repos = await res.json();
+
+  const fccRepos = repos.filter(r => r.name.startsWith("fcc-"));
+
+  fccRepos.forEach(repo => {
+    const name = repo.name.replace("fcc-", "").replace(/-/g, " ");
+    const projectName = name.replace(/\b\w/g, char => char.toUpperCase());
+    const demo = `https://${username}.github.io/${repo.name}`;
+    const code = repo.html_url;
+    const desc = repo.description || "FreeCodeCamp project";
+
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.innerHTML = `
+      <h3>${projectName}</h3>
+      <p>${desc}</p>
+      <a href="${demo}" target="_blank">🔗 Live Demo</a>
+      <a href="${code}" target="_blank">💻 Code</a>
+    `;
+    projectsDiv.appendChild(card);
+  });
+}
+
+loadProjects();
